@@ -1,6 +1,13 @@
+<?php
 namespace Entity;
 
 class Event{
-    public $nom;
-    public $type;
+    private $nom;
+    private $type;
+
+    public function __construct($nom, $type){
+    	$this->nom = $nom;
+    	$this->type = $type;
+    }
+
 }
