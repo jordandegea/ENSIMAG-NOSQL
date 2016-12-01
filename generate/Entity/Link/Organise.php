@@ -15,6 +15,6 @@ class Organise{
      *
      */
     public function export($liste){
-	    return "CREATE ($liste->nom)-[:ORGANISE]->({$this->event->nom})";
+	    return "CREATE ($liste->nom)-[:ORGANISE]->({$this->event->nom})\n";
     }
 }

@@ -67,7 +67,7 @@ for ($i = 0 ; $i < NB_PERSONNES ; $i++){
         $personneRandom->generateOne(rand()));
 }
 for ($i = 0 ; $i < NB_LISTES ; $i++){
-    $type = ($i%2 == 0)?"sport":"eleve";
+    $type = ($i%2 == 0)?"BDS":"BDE";
     array_push(
         $listes,
         $listeRandom->generateOne(rand(),$type));
@@ -230,7 +230,7 @@ foreach ($sponsors as $sponsor) {
 	print($sponsor->exportRelations());
 }
 
-foreach ($persons as $person) {
+foreach ($personnes as $person) {
 	print($person->exportRelations());
 }
 

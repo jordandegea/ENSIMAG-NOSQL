@@ -10,9 +10,9 @@ namespace Randomizer;
  */
 class SponsorRandom
 {
-
+	private $i = 0;
     public function getNom($rand){
-        return "Sponsor ".$rand%1000;
+        return "Sponsor".$this->i++;
     }
 
     public function generateOne($rand){

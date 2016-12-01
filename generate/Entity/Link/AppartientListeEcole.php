@@ -15,6 +15,6 @@ class AppartientListeEcole{
      *
      */
     public function export($liste){
-        return "CREATE ($liste->nom)-[:APPARTIENT]->({$this->ecole->nom})";
+        return "CREATE ($liste->nom)-[:APPARTIENT]->({$this->ecole->nom})\n";
     }
 }

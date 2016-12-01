@@ -18,6 +18,6 @@ class EstListe{
      */
     public function export($person){
 	$name = $person->fullName();
-        return "CREATE ($name)-[:EST_LISTE {role:$this->role}]->({$this->liste->nom})";
+        return "CREATE ($name)-[:EST_LISTE {role:'$this->role'}]->({$this->liste->nom})\n";
     }
 }

@@ -3,7 +3,7 @@ namespace Entity;
 
 
 class Ecole{
-    private $nom;
+    public $nom;
 
     public function __construct($nom){
     	$this->nom = $nom;
@@ -13,6 +13,6 @@ class Ecole{
      *
      */
     public function export(){
-        return "CREATE($this->nom:Ecole {nom:$this->nom})";
+        return "CREATE($this->nom:Ecole {nom:'$this->nom'})\n";
     }
 }

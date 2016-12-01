@@ -9,8 +9,9 @@ namespace Randomizer;
  */
 class SOSRandom
 {
+	private $i = 0;
     public function getNom($rand){
-        return "SOS ".$rand%1000;
+        return "SOS".$this->i++;
     }
     public function getPrix($rand){
         return ( $rand % 1000 ) / 100;

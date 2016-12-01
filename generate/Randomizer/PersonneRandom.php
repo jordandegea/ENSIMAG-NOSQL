@@ -9,14 +9,17 @@ namespace Randomizer;
  */
 class PersonneRandom
 {
+	private $i = 0;
+	private $j = 0;
+
     public function getPrenom($rand)
     {
-        return "Prenom " . $rand % 1000;
+        return "Prenom" . $this->i++;
     }
 
     public function getNom($rand)
     {
-        return "Nom " . $rand % 1000;
+        return "Nom" . $this->j++;
     }
 
     public function getAnnee($rand)

@@ -6,8 +6,8 @@ use Entity\Link\Organise;
 use Entity\Link\Propose;
 
 class Liste{
-    private $nom;
-    private $type;
+    public $nom;
+    public $type;
 
     public $appartientEcole;
     public $organiseEvents = array();
@@ -18,7 +18,7 @@ class Liste{
     	$this->type = $type;
     }
 
-    public function AppartientEcole(Ecole $ecole){
+    public function setAppartientEcole(Ecole $ecole){
         $this->appartientEcole = new AppartientListeEcole($ecole);
     }
 
@@ -34,18 +34,16 @@ class Liste{
      *
      */
     public function export(){
-        return "CREATE($this->nom:Liste {nom: $this->nom, type: $this->type})";
+        return "CREATE($this->nom:Liste {nom: '$this->nom', type: '$this->type'})\n";
     }
 
     public function exportRelations() {
 	$export = "";
-	foreach ($this->organiseEvent as $organise) {
-		$export .= $organize->export($this);
-		$export .= '\n';
+	foreach ($this->organiseEvents as $organise) {
+		$export .= $organise->export($this);
 	}
 	foreach ($this->proposeSOS as $propose) {
 		$export .= $propose->export($this);
-		$export .= '\n';
 	}
 	$export .= $this->appartientEcole->export($this);
 

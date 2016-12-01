@@ -10,11 +10,12 @@ use Entity\Event;
  */
 class EcoleRandom
 {
-    public function getNom($rand){
-        return "Ecole ".$rand%1000;
-    }
+	private $i = 0;
+	public function getNom($rand){
+		return "Ecole".$this->i++;
+	}
 
-    public function generateOne($rand){
-        return new \Entity\Ecole($this->getNom($rand));
-    }
+	public function generateOne($rand){
+		return new \Entity\Ecole($this->getNom($rand));
+	}
 }

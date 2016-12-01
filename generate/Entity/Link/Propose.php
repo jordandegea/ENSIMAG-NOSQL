@@ -17,6 +17,6 @@ class Propose{
      *
      */
     public function export($liste){
-        return "CREATE ($liste->nom)-[:PROPOSE]->({$this->sos->nom})";
+        return "CREATE ($liste->nom)-[:PROPOSE]->({$this->sos->nom})\n";
     }
 }

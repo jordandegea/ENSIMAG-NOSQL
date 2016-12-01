@@ -11,13 +11,13 @@ class Aide{
 
     public function __construct(Liste $liste, $montant){
         $this->montant = $montant;
-        $this->sponsor = $liste;
+        $this->liste = $liste;
     }
 
     /**
      *
      */
     public function export($sponsor){
-        return "CREATE ($sponsor->name)-[:AIDE {montant:$this->montant}]->({$this->liste->nom})";
+        return "CREATE ($sponsor->nom)-[:AIDE {montant:$this->montant}]->({$this->liste->nom})\n";
     }
 }

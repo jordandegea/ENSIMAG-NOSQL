@@ -18,6 +18,6 @@ class Participe{
      */
     public function export($person){
 	$name = $person->fullName();
-        return "CREATE ($name)-[:PARTICIPE {appreciation: $this->appreciation}]->({$this->event->nom})";
+        return "CREATE ($name)-[:PARTICIPE {appreciation: $this->appreciation}]->({$this->event->nom})\n";
     }
 }

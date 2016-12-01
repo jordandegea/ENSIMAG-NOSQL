@@ -9,8 +9,9 @@ namespace Randomizer;
  */
 class ListeRandom
 {
+	private $i = 0;
     public function getNom($rand){
-        return "Liste ".$rand%1000;
+        return "Liste".$this->i++;
     }
 
     public function generateOne($rand, $type){

@@ -20,7 +20,7 @@ class Sponsor{
      *
      */
     public function export(){
-        return "CREATE($this->nom:Sponsor {nom:$this->nom})";
+        return "CREATE($this->nom:Sponsor {nom:'$this->nom'})\n";
     }
 
     public function exportRelations() {

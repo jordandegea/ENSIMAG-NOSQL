@@ -17,6 +17,6 @@ class SOS{
      *
      */
     public function export(){
-        return "CREATE($this->nom:SOS {nom:$this->nom, prix:$this->prix, cout:$this->cout})";
+        return "CREATE($this->nom:SOS {nom:'$this->nom', prix:$this->prix, cout:$this->cout})\n";
     }
 }

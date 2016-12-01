@@ -2,8 +2,8 @@
 namespace Entity;
 
 class Event{
-    private $nom;
-    private $type;
+    public $nom;
+    public $type;
     public $prix;
     public $cout;
 
@@ -18,7 +18,7 @@ class Event{
      *
      */
     public function export(){
-        return "CREATE($this->nom:Evenement {nom: $this->nom})";
+        return "CREATE($this->nom:Evenement {nom: '$this->nom'})\n";
     }
 
 }

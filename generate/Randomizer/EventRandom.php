@@ -9,8 +9,9 @@ namespace Randomizer;
  */
 class EventRandom
 {
+	private $i = 0;
     public function getNom($rand){
-        return "Event ".$rand%1000;
+        return "Event".$this->i++;
     }
 
     public function getPrix($rand){

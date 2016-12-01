@@ -47,32 +47,31 @@ class Personne{
     }
 
     public function fullName() {
-	return $this->prenom . " " . $this->nom;
+	return $this->prenom . $this->nom;
     }
 
     /**
      *
      */
     public function export(){
-        return "CREATE({${$this->fullName()}}:Personne {prenom: $this->prenom, nom: $this->nom, annee: $this->annee, sexe: $this->sexe})";
+	$nom = $this->fullName();
+        return "CREATE($nom:Personne {prenom: '$this->prenom', nom: '$this->nom', annee: $this->annee, sexe: '$this->sexe'})\n";
     }
 
     public function exportRelations() {
 	$export = "";
 	foreach ($this->participeEvents as $participe) {
 		$export .= $participe->export($this);
-		$export .= '\n';
 	}
-	foreach ($this->demandeSOS $demande) {
+	foreach ($this->aDemandeSOS as $demande) {
 		$export .= $demande->export($this);
-		$export .= '\n';
 	}
 	foreach ($this->appartientListe as $appartient) {
 		$export .= $appartient->export($this);
-		$export .= '\n';
 	}
-	$export .= $this->enCouple->export($this);
-	$export .= '\n' . $this->appartientEcole->export($this);
+	if (!is_null($this->enCouple))
+		$export .= $this->enCouple->export($this);
+	$export .= $this->appartientEcole->export($this);
 
 	return $export;
     }
