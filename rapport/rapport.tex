@@ -40,20 +40,30 @@
 
 \section{Introduction}
 
-\subsection{Choix technologique et sujet}
+\subsection{Technology and Subject choice}
 
-MongoDB est plus souvent utilisé que Neo4J, par exemple pour les backends mobile. Nous avons choisi d'utiliser Neo4j car les cas d'applications nous semblent plus intéressant et que ce TP est l'occasion de mettre en place une base Neo4j. \\
+MongoDB is more used than Neo4j, e.g. for mobile backends. We chose Neo4j for applications which seems more interesting. Furthermore, this TP a chance for us to create and use a Neo4j database. 
 \linebreak
 
-Notre sujet s'intitule "Prévision des listes gagnantes d'une école". Nous voulions appliquer ce TP à un cas concret. L'objectif est de faire des pronostics sur les résultats suite à une campagne. 
+Our subject is named "Prognosis of a school's winning lists". We wanted to apply this TP to a concrete application. The objective is to predict the results of lists after the campaign. 
 
-\section{Projet}
+\section{Project}
 
-\subsection{Données}
+\subsection{Database}
 
 % Diagramme
 
-\subsection{Requêtes}
+Each \textit{Liste} can propose several \textit{SOS}. \textit{SOS} is linked to one \textit{Liste}. \\
+Each \textit{Liste} can propose several \textit{Event}. \textit{Event} is linked to one \textit{Liste} \\
+Each \textit{Personne} can be in love with one \textit{Personne}. \\
+Each \textit{Sponsor} can help one \textit{Liste}. \\
+A defined number of \textit{Personne} (e.g. 25) can be in a \textit{Liste}. \\
+Each \textit{Personne} can ask several \textit{SOS} from several \textit{Liste}. They can ask 0 or more times the same \textit{SOS}. \\
+Each \textit{Personne} can participate in an \textit{Event}. \\
+Each \textit{Personne} is in one \textit{Ecole}. \\
+Each \textit{Liste} is in one \textit{Ecole}. \\
+
+\subsection{Request}
 
 % Liste des requetes
 % 1 file by query
