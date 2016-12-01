@@ -1,1 +1,7 @@
 ._*
+generate/.idea/
+rapport/rapport.aux
+rapport/rapport.log
+rapport/rapport.out
+rapport/rapport.pdf
+rapport/rapport.synctex.gz
