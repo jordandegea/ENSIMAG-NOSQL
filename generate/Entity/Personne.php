@@ -4,6 +4,7 @@ namespace Entity;
 use Entity\Link\ADemande;
 use Entity\Link\AppartientPersonneEcole;
 use Entity\Link\EnCouple;
+use Entity\Link\EstListe;
 use Entity\Link\Participe;
 
 class Personne{
@@ -17,6 +18,7 @@ class Personne{
     public $enCouple;
     public $aDemandeSOS = array();
     public $appartientEcole;
+    public $appartientListe = array()
 
     public function __construct($nom, $prenom, $annee, $sexe){
         $this->nom = $nom;
@@ -33,8 +35,11 @@ class Personne{
         $this->participeEvents[] = new Participe($event, $appreciation);
     }
 
-    public function addDemandeSOS(SOS $sos, Liste $list, $nombre){
-        $this->aDemandeSOS[] = new ADemande($sos, $liste, $nombre);
+    public function addDemandeSOS(SOS $sos, $nombre){
+        $this->aDemandeSOS[] = new ADemande($sos, $nombre);
+    }
+    public function addAppartientListe(Liste $liste){
+        $this->appartientListe[] = new EstListe($liste)
     }
 
     public function setAppartientEcole(Ecole $ecole){
