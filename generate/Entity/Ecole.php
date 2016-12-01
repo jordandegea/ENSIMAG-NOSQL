@@ -8,4 +8,11 @@ class Ecole{
     public function __construct($nom){
     	$this->nom = $nom;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

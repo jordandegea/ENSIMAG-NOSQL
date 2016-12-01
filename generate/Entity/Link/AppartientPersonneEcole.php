@@ -9,4 +9,11 @@ class AppartientPersonneEcole{
     public function __construct(Ecole $ecole){
         $this->ecole = $ecole;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

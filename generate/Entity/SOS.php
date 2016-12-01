@@ -12,4 +12,11 @@ class SOS{
     	$this->prix = $prix;
     	$this->cout = $cout;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

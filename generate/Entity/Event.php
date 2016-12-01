@@ -14,4 +14,11 @@ class Event{
         $this->cout = $cout;
     }
 
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
+
 }

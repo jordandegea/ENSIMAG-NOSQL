@@ -55,7 +55,11 @@ $personnes = array();
 $SOS = array();
 $sponsors = array();
 
-// Generation de tous les objets
+/* ******************************
+ *
+ * Generation de tous les objets
+ *
+ ****************************** */
 
 for ($i = 0 ; $i < NB_PERSONNES ; $i++){
     array_push(
@@ -89,6 +93,11 @@ for ($i = 0 ; $i < NB_SPONSORS ; $i++){
         $sponsorRandom->generateOne(rand()));
 }
 
+/* *************************
+ *
+ * Generation des relations
+ *
+ * ************************* */
 
 /* @var $personne1 Personne */
 /* @var $personne2 Personne */
@@ -123,8 +132,8 @@ for ($i = 0 ; $i < NB_PERSONNES; $i++){
 for ($i = 0 ; $i < NB_LISTES; $i++){
     $ecole_id = rand()%NB_ECOLES;
     $ecole = $ecoles[$ecole_id];
-    $personne = $personnes[$i];
-    $personne->setAppartientEcole($ecole);
+    $liste = $listes[$i];
+    $liste->setAppartientEcole($ecole);
 }
 
 // Linkage Personne Liste
@@ -174,7 +183,6 @@ for ($i = 0 ; $i < NB_PERSONNES; $i++) {
     }
 }
 
-
 // Linkage Personne SOS
 for ($i = 0 ; $i < NB_PERSONNES; $i++) {
     $personne = $personnes[$i];
@@ -184,6 +192,81 @@ for ($i = 0 ; $i < NB_PERSONNES; $i++) {
         $personne->addDemandeSOS($SOS_ob, $nombre);
     }
 }
+
+
+/* ***************************
+ *
+ *  Exporter données
+ *
+ *************************** */
+
+for ($i = 0 ; $i < NB_PERSONNES ; $i++){
+    $personne = $personnes[$i];
+    print($personne->export());
+}
+for ($i = 0 ; $i < NB_LISTES ; $i++){
+    $liste = $listes[$i];
+    print($liste->export());
+}
+for ($i = 0 ; $i < NB_ECOLES ; $i++){
+    $ecole = $ecoles[$i];
+    print($ecole->export());
+}
+for ($i = 0 ; $i < NB_EVENTS_PAR_LISTE*NB_LISTES ; $i++){
+    $event = $events[$i];
+    print($event->export());
+}
+for ($i = 0 ; $i < NB_SOS_PAR_LISTE*NB_LISTES ; $i++){
+    $sos = $SOS[$i];
+    print($sos->export());
+}
+for ($i = 0 ; $i < NB_SPONSORS ; $i++){
+    $sponsor = $sponsors[$i];
+    print($sponsor->export());
+}
+
+
+for ($i = 0 ; $i < NB_PERSONNES ; $i++){
+    $personne = $personnes[$i];
+    if ( $personne->enCouple != null){
+        $personne->enCouple->export();
+    }
+    $personne->appartientEcole->export();
+
+    for ($j = 0 ; $j < count($personne->participeEvents) ; $j++){
+        $personne->participeEvents[$j]->export();
+    }
+    for ($j = 0 ; $j < count($personne->aDemandeSOS) ; $j++){
+        $personne->aDemandeSOS[$j]->export();
+    }
+    for ($j = 0 ; $j < count($personne->appartientListe) ; $j++){
+        $personne->appartientListe[$j]->export();
+    }
+}
+
+
+for ($i = 0 ; $i < NB_LISTES ; $i++) {
+    $liste = $listes[$i];
+
+    $liste->appartientEcole->export();
+
+    for ( $j = 0 ; $j < count($liste->organiseEvents) ; $j++){
+        $liste->organiseEvents[$j]->export();
+    }
+    for ( $j = 0 ; $j < count($liste->proposeSOS) ; $j++){
+        $liste->proposeSOS[$j]->export();
+    }
+}
+
+
+for ($i = 0 ; $i < NB_SPONSORS ; $i++){
+    $sponsor = $sponsors[$i];
+    $sponsor->aide->export();
+}
+
+
+
+
 
 
 

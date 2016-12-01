@@ -12,4 +12,11 @@ class ADemande{
         $this->nombre = $nombre;
         $this->SOS = $SOS;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

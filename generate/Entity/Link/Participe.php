@@ -12,4 +12,11 @@ class Participe{
         $this->appreciation = $appreciation;
         $this->event = $event;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

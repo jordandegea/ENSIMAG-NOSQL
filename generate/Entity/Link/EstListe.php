@@ -12,4 +12,11 @@ class EstListe{
         $this->role = $role;
         $this->liste = $liste;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

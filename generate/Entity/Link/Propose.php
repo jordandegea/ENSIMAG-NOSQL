@@ -12,4 +12,11 @@ class Propose{
     {
         $this->sos = $sos;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

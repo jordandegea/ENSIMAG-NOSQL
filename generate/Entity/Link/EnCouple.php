@@ -10,4 +10,11 @@ class EnCouple{
     {
         $this->personne = $personne;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

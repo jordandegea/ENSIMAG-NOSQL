@@ -10,4 +10,11 @@ class AppartientListeEcole{
     {
         $this->ecole = $ecole;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

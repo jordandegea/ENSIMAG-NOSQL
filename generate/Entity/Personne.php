@@ -46,4 +46,11 @@ class Personne{
         $this->appartientEcole = new AppartientPersonneEcole($ecole);
     }
 
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

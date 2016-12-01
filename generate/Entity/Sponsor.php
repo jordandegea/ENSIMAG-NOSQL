@@ -15,4 +15,11 @@ class Sponsor{
     public function setAide(Liste $liste, $montant){
     	$this->aide = new Aide($liste, $montant);
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

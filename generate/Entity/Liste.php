@@ -29,4 +29,11 @@ class Liste{
     public function addProposeSOS(SOS $sos){
         $this->proposeSOS[] = new Propose($sos);
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

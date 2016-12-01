@@ -10,4 +10,11 @@ class Organise{
     {
         $this->event = $event;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }

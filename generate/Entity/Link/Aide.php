@@ -13,4 +13,11 @@ class Aide{
         $this->montant = $montant;
         $this->sponsor = $sponsor;
     }
+
+    /**
+     *
+     */
+    public function export(){
+        return "";
+    }
 }
