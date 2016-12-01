@@ -3,11 +3,12 @@
 
 # Generation de données automatique
 
-- Generer 800 personnes
-- Generer 6 listes
+- Generer 600 personnes
+- Generer 2 listes
 - Generer ~20 sponsors
-- Generer 6*10 SOS
-- Generer 6*4 Event
+- Generer 2*7 SOS
+- Generer 2*4 Event<<<<<<<<<<<<<<<QAW
+- Generer 1 Ecole
 
 - Lier 100 couples
 - Lier 25 personnes par liste
