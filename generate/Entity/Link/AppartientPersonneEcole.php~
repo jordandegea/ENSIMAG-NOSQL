@@ -13,8 +13,7 @@ class AppartientPersonneEcole{
     /**
      *
      */
-    public function export($personne){
-	$name = $personne->fullName();
-        return "CREATE ($name)-[:APPARTIENT]->({$this->ecole->nom})";
+    public function export(){
+        return "";
     }
 }
