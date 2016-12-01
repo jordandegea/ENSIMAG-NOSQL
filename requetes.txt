@@ -1,0 +1,5 @@
+1 - Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
+2 - Calculer pour chaque liste la somme totale obtenue par ses sponsors
+3 - Retourner les couples dont un des membres est dans plus d'une liste
+4 - Retourner l'évènement le mieux apprécié
+5 - Retourner la liste ayant effectué le plus de SOS
