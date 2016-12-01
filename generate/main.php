@@ -226,6 +226,19 @@ for ($i = 0 ; $i < NB_SPONSORS ; $i++){
 }
 
 
+foreach ($sponsors as $sponsor) {
+	print($sponsor->exportRelations());
+}
+
+foreach ($persons as $person) {
+	print($person->exportRelations());
+}
+
+foreach ($listes as $liste) {
+	print($liste->exportRelations());
+}
+
+/*
 for ($i = 0 ; $i < NB_PERSONNES ; $i++){
     $personne = $personnes[$i];
     if ( $personne->enCouple != null){
@@ -263,12 +276,4 @@ for ($i = 0 ; $i < NB_SPONSORS ; $i++){
     $sponsor = $sponsors[$i];
     $sponsor->aide->export();
 }
-
-
-
-
-
-
-
-
-
+*/
