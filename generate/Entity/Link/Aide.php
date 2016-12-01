@@ -1,6 +1,7 @@
 <?php
 namespace Entity\Link;
 
+use Entity\Liste;
 use Entity\Sponsor;
 
 class Aide{
@@ -8,7 +9,7 @@ class Aide{
 
     public $sponsor;
 
-    public function __construct(Sponsor $sponsor, $montant){
+    public function __construct(Liste $sponsor, $montant){
         $this->montant = $montant;
         $this->sponsor = $sponsor;
     }

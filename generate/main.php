@@ -2,8 +2,8 @@
 
 define("NB_ECOLES", 1);
 define("NB_LISTES", 2);
-define("NB_EVENTS", NB_LISTES*4);
-define("NB_SPONSORS", 20);
+define("NB_EVENTS_PAR_LISTE", 4);
+define("NB_SPONSORS", 12);
 define("NB_SOS_PAR_LISTE", 7);
 define("NB_PERSONNES", 600);
 define("NB_PERSONNE_PAR_LISTE", 20);
@@ -73,7 +73,7 @@ for ($i = 0 ; $i < NB_ECOLES ; $i++){
         $ecoles,
         $ecoleRandom->generateOne(rand()));
 }
-for ($i = 0 ; $i < NB_EVENTS ; $i++){
+for ($i = 0 ; $i < NB_EVENTS_PAR_LISTE*NB_LISTES ; $i++){
     array_push(
         $events,
         $eventRandom->generateOne(rand()));
@@ -94,9 +94,11 @@ for ($i = 0 ; $i < NB_SPONSORS ; $i++){
 /* @var $personne2 Personne */
 
 /* @var $personne Personne */
-/* @var $ecole Ecole */
 /* @var $liste Liste */
+/* @var $event Event */
 /* @var $ecole Ecole */
+/* @var $sponsor Sponsor */
+/* @var $SOS_ob SOS */
 
 // Linkage Couple
 for ($i = 0 ; $i < NB_COUPLES ; $i++){
@@ -130,12 +132,58 @@ for ($i = 0 ; $i < NB_LISTES; $i++){
     $liste = $listes[$i];
     for ($j = 0 ; $j < NB_PERSONNE_PAR_LISTE; $j++) {
         $personne = $personnes[$j];
-        $personne->addAppartientListe($liste);
+        $personne->addAppartientListe($liste, "role");
     }
 }
 
 //Linkage Liste SOS
+for ($i = 0 ; $i < NB_LISTES; $i++){
+    $liste = $listes[$i];
+    for ($j = 0 ; $j < NB_SOS_PAR_LISTE; $j++) {
+        $SOS_ob = $SOS[$i*NB_LISTES+$j];
+        $liste->addProposeSOS($SOS_ob);
+    }
+}
 
+//Linkage Liste Events
+for ($i = 0 ; $i < NB_LISTES; $i++){
+    $liste = $listes[$i];
+    for ($j = 0 ; $j < NB_EVENTS_PAR_LISTE; $j++) {
+        $event = $events[$i*NB_LISTES+$j];
+        $liste->addOrganiseEvent($event);
+    }
+}
+//Linkage Liste Sponsor
+for ($i = 0 ; $i < NB_SPONSORS; $i++){
+    $sponsor = $sponsors[$i];
+    $liste_id = rand()%NB_LISTES;
+    $liste = $listes[$liste_id];
+    $sponsor->setAide($liste, rand()%2000+1000);
+}
+
+// Linkage participe event
+for ($i = 0 ; $i < NB_PERSONNES; $i++) {
+    $personne = $personnes[$i];
+    $motivation = rand()%10;
+    for ($j = 0; $j < NB_EVENTS_PAR_LISTE * NB_LISTES; $j++) {
+        $event = $events[$j];
+        $motivation_event = rand()%10;
+        if ($motivation > $motivation_event){
+            $personne->addParticipeEvent($event, $motivation_event*$motivation);
+        }
+    }
+}
+
+
+// Linkage Personne SOS
+for ($i = 0 ; $i < NB_PERSONNES; $i++) {
+    $personne = $personnes[$i];
+    for ($j = 0; $j < NB_SOS_PAR_LISTE * NB_LISTES; $j++) {
+        $SOS_ob = $SOS[$j];
+        $nombre = rand()%10;
+        $personne->addDemandeSOS($SOS_ob, $nombre);
+    }
+}
 
 
 

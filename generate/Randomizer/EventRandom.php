@@ -24,6 +24,6 @@ class EventRandom
         $type = "";
         $prix = $this->getPrix($rand);
         $cout = $this->getCout($rand, $prix);
-        return new \Entity\Liste($this->getNom($rand), $type, $prix, $cout);
+        return new \Entity\Event($this->getNom($rand), $type, $prix, $cout);
     }
 }

@@ -18,7 +18,7 @@ class Personne{
     public $enCouple;
     public $aDemandeSOS = array();
     public $appartientEcole;
-    public $appartientListe = array()
+    public $appartientListe = array();
 
     public function __construct($nom, $prenom, $annee, $sexe){
         $this->nom = $nom;
@@ -38,8 +38,8 @@ class Personne{
     public function addDemandeSOS(SOS $sos, $nombre){
         $this->aDemandeSOS[] = new ADemande($sos, $nombre);
     }
-    public function addAppartientListe(Liste $liste){
-        $this->appartientListe[] = new EstListe($liste)
+    public function addAppartientListe(Liste $liste, $role){
+        $this->appartientListe[] = new EstListe($liste, $role);
     }
 
     public function setAppartientEcole(Ecole $ecole){

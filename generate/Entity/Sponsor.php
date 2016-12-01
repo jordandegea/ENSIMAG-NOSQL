@@ -12,7 +12,7 @@ class Sponsor{
     	$this->nom = $nom;
     }
 
-    public function setAide(Liste $liste){
-    	$this->aide = new Aide($liste);
+    public function setAide(Liste $liste, $montant){
+    	$this->aide = new Aide($liste, $montant);
     }
 }
