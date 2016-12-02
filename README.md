@@ -21,10 +21,8 @@
 
 # Commandes 
 
- - Nombre de participant pour chaque event avec appréciation moyenne
- - Nombre de participant appartenant à l'écolepour chaque event avec appréciation moyenne
- - Nombre de demande pour chaque SOS pour chaque liste
- - Finances pour chaque Liste
- - Quels sont les couples (1 par pair)
- - Pour chaque école, combien y-a t'il d'élève listé
- - Pour chaque école, pour chaque type de liste, quels sont les pourcentages d'être élu. 
+ 1. Appréciation moyenne pour chaque Event découpé par liste 
+ 2. Liste des listes par type par école
+ 3. Finances pour chaque Liste
+ 4. Pourcentage de reussite pour chaque liste
+ 5. Nombre de demande pour chaque SOS pour chaque liste
