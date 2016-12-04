@@ -1,14 +1,14 @@
 <?php
 
-define("NB_ECOLES", 1);
-define("NB_LISTES", 2);
+define("NB_ECOLES", 2);
+define("NB_LISTES", 5);
 define("NB_EVENTS_PAR_LISTE", 4);
 define("NB_SPONSORS", 12);
-define("NB_SOS_PAR_LISTE", 7);
-define("NB_PERSONNES", 600);
-define("NB_PERSONNE_PAR_LISTE", 20);
+define("NB_SOS_PAR_LISTE", 4);
+define("NB_PERSONNES", 200);
+define("NB_PERSONNE_PAR_LISTE", 10);
 
-define("NB_COUPLES", 50);
+define("NB_COUPLES", 20);
 
 foreach (glob("Entity/*.php") as $filename)
 {
@@ -139,17 +139,19 @@ for ($i = 0 ; $i < NB_LISTES; $i++){
 // Linkage Personne Liste
 for ($i = 0 ; $i < NB_LISTES; $i++){
     $liste = $listes[$i];
-    for ($j = 0 ; $j < NB_PERSONNE_PAR_LISTE; $j++) {
-        $personne = $personnes[$j];
+    for ($j = 0 ; $j < NB_PERSONNE_PAR_LISTE-1; $j++) {
+	$index = $i*NB_PERSONNE_PAR_LISTE + $j;
+        $personne = $personnes[$index];
         $personne->addAppartientListe($liste, "role");
     }
+    $personnes[$i*NB_PERSONNE_PAR_LISTE + NB_PERSONNE_PAR_LISTE - 1]->addAppartientListe($liste, 'president');
 }
 
 //Linkage Liste SOS
 for ($i = 0 ; $i < NB_LISTES; $i++){
     $liste = $listes[$i];
     for ($j = 0 ; $j < NB_SOS_PAR_LISTE; $j++) {
-        $SOS_ob = $SOS[$i*NB_LISTES+$j];
+        $SOS_ob = $SOS[$i*NB_SOS_PAR_LISTE+$j];
         $liste->addProposeSOS($SOS_ob);
     }
 }
@@ -158,7 +160,7 @@ for ($i = 0 ; $i < NB_LISTES; $i++){
 for ($i = 0 ; $i < NB_LISTES; $i++){
     $liste = $listes[$i];
     for ($j = 0 ; $j < NB_EVENTS_PAR_LISTE; $j++) {
-        $event = $events[$i*NB_LISTES+$j];
+        $event = $events[$i*NB_EVENTS_PAR_LISTE+$j];
         $liste->addOrganiseEvent($event);
     }
 }
