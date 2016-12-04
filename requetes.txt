@@ -1,5 +1,14 @@
 1 - Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
+MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
+MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
+RETURN l.nom,p.nom,e.nom
+
 2 - Calculer pour chaque liste la somme totale obtenue par ses sponsors
 3 - Retourner les couples dont un des membres est dans plus d'une liste
-4 - Retourner l'évènement le mieux apprécié
+
+4 - Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants
+MATCH (e:Evenement)<-[p:PARTICIPE]-(r:Personne)
+RETURN e.nom, sum(p.appreciation)/count(p) AS score
+ORDER BY score DESC
+
 5 - Retourner la liste ayant effectué le plus de SOS
