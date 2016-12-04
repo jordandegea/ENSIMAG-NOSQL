@@ -20,9 +20,62 @@
 
 \begin{document}
 
+%You have to provide a compressed file that contains the report and two folders:
+%- Folder 1 contains the data, scripts and instructions to populate the database.
+%- Folder 2 contains the queries proposed (one file by query)
+
+%The compressed file name must follow the next format: “noSQL_MSBigData_GroupXX”, where XX have to be changed by the corresponding number group assigned by Teide.
+
+%Write a text describing the data stored in the database. This text should not exceed 15lines.You can include a figure to illustrate.
+
+% Text font size: 11 or 12
+
+
 \maketitle
 
 \section{Introduction}
+
+\subsection{Technology and Subject choice}
+
+We knew that MongoDB was more used than Neo4j, e.g. for mobile backends. So we prefered to use Neo4J because this TP a chance for us to create and use a Neo4j database.  Furthermore, we chose Neo4j for applications which seems more interesting. 
+\linebreak
+
+Our subject is named "Prognosis of a school's winning lists". We wanted to apply this TP to a concrete application. The objective is to predict the results of lists after the campaign. In Bonus, we calculate costs and earnings for each lists. 
+
+\section{Project}
+
+\subsection{Database}
+
+% Diagramme
+
+Each \textit{Liste} can propose several \textit{SOS}. \textit{SOS} is linked to one \textit{Liste}. \\
+Each \textit{Liste} can propose several \textit{Event}. \textit{Event} is linked to one \textit{Liste} \\
+Each \textit{Personne} can be in love with one \textit{Personne}. \\
+Each \textit{Sponsor} can help one \textit{Liste}. \\
+A defined number of \textit{Personne} (e.g. 25) can be in a \textit{Liste}. \\
+Each \textit{Personne} can ask several \textit{SOS} from several \textit{Liste}. They can ask 0 or more times the same \textit{SOS}. \\
+Each \textit{Personne} can participate in an \textit{Event}. \\
+Each \textit{Personne} is in one \textit{Ecole}. \\
+Each \textit{Liste} is in one \textit{Ecole}. \\
+
+\subsection{Request}
+
+% Liste des requetes
+% 1 file by query
+% Describe the indexes proposed and explain yourdecision.This text should not exceed 4linesby index.
+% For each query, provide it :
+%   in natural language.  This text should not exceed 3 lines
+%   in the language of the systemand
+%   If there are indexes involved, describe their impact. This text should not exceed 3linesby index
+%   Advantages and disadvantages of the query implementation proposed.
+
+\subsubsection{Average opinion for each Event and each Liste} 
+
+\subsubsection{List of Liste for each type and each Ecole}
+\subsubsection{Finances for each Liste}
+\subsubsection{Chance to win for each Liste}
+\subsubsection{Number of demande for each SOS for each Liste}
+
 
 
 \end{document}
