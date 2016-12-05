@@ -116,7 +116,6 @@ for ($i = 0 ; $i < NB_COUPLES ; $i++){
     $personne1 = $personnes[$personne_id1];
     $personne2 = $personnes[$personne_id2];
     $personne1->setCouple($personne2);
-    $personne2->setCouple($personne1);
 }
 
 
@@ -240,42 +239,6 @@ foreach ($listes as $liste) {
 	print($liste->exportRelations());
 }
 
-/*
-for ($i = 0 ; $i < NB_PERSONNES ; $i++){
-    $personne = $personnes[$i];
-    if ( $personne->enCouple != null){
-        $personne->enCouple->export();
-    }
-    $personne->appartientEcole->export();
-
-    for ($j = 0 ; $j < count($personne->participeEvents) ; $j++){
-        $personne->participeEvents[$j]->export();
-    }
-    for ($j = 0 ; $j < count($personne->aDemandeSOS) ; $j++){
-        $personne->aDemandeSOS[$j]->export();
-    }
-    for ($j = 0 ; $j < count($personne->appartientListe) ; $j++){
-        $personne->appartientListe[$j]->export();
-    }
-}
-
-
-for ($i = 0 ; $i < NB_LISTES ; $i++) {
-    $liste = $listes[$i];
-
-    $liste->appartientEcole->export();
-
-    for ( $j = 0 ; $j < count($liste->organiseEvents) ; $j++){
-        $liste->organiseEvents[$j]->export();
-    }
-    for ( $j = 0 ; $j < count($liste->proposeSOS) ; $j++){
-        $liste->proposeSOS[$j]->export();
-    }
-}
-
-
-for ($i = 0 ; $i < NB_SPONSORS ; $i++){
-    $sponsor = $sponsors[$i];
-    $sponsor->aide->export();
-}
-*/
+print("CREATE CONSTRAINT ON (a:Liste) ASSERT a.nom IS UNIQUE\n")
+print("CREATE CONSTRAINT ON (a:Ecole) ASSERT a.nom IS UNIQUE\n")
+print("CREATE CONSTRAINT ON (a:Evenement) ASSERT a.nom IS UNIQUE\n")
