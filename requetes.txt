@@ -4,7 +4,18 @@ MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
 RETURN l.nom,p.nom,e.nom
 
 2 - Calculer pour chaque liste la somme totale obtenue par ses sponsors
+MATCH (l:Liste)-[a:AIDE]-() 
+RETURN l.nom, sum(a.montant) AS Subventions
+
 3 - Retourner les couples dont un des membres est dans plus d'une liste
+MATCH (p1:Personne)-[:EN_COUPLE]->(p2:Personne)
+MATCH (p1)-[:EST_LISTE]->(l1:Liste)
+MATCH (p2)-[:EST_LISTE]->(l2:Liste)
+WITH p1 as p1, p2 as p2, count(l2) as nombre_listes2, count(l1) as nombre_listes1
+WHERE nombre_listes1 > 1 OR nombre_listes2 > 1 
+RETURN p1.nom , p2.nom
+ORDER BY p1.nom
+
 
 4 - Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants
 MATCH (e:Evenement)<-[p:PARTICIPE]-(r:Personne)
@@ -12,3 +23,8 @@ RETURN e.nom, sum(p.appreciation)/count(p) AS score
 ORDER BY score DESC
 
 5 - Retourner la liste ayant effectué le plus de SOS
+MATCH (l:Liste)-[]->(s:SOS)
+MATCH (s)-[demande:A_DEMANDE]-()
+RETURN l.nom, sum(demande.nombre) as nombre_sos
+ORDER BY nombre_sos desc LIMIT 1
+
