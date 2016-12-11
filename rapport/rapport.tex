@@ -35,52 +35,52 @@
 
 \section{Introduction}
 
-\subsection{Technology and Subject choice}
-
-We knew that MongoDB was more used than Neo4j, e.g. for mobile backends. So we prefered to use Neo4J because this TP a chance for us to create and use a Neo4j database.  Furthermore, we chose Neo4j for applications which seems more interesting. 
+\subsection{Technologie and choix de sujet}
+On savait que MongoDB était plus tilisé que Neo4j (par exemple pour les backends mobiles). C'est pourquoi on a préféré utiliser Neo4j: parce que ce TP est une opportunité pour nous de créer et utiliser une base de donnée Neo4j. De plus, on a choisi Neo4j car les applications dans le cadre de ce projet nous semblaient plus intéressantes.
 \linebreak
 
-Our subject is named "Prognosis of a school's winning lists". We wanted to apply this TP to a concrete application. The objective is to predict the results of lists after the campaign. In Bonus, we calculate costs and earnings for each lists. 
+Notre sujet se nomme "Pronostique des listes gagnantes d'un école". On voulait donc profiter de ce TP pour mettre en place une application concrète. L'objectif est de prédire les listes gagnantes d'une campagne d'élection au BDE, BDS, BDA... En bonus, nous allons pouvoir calculer les budgets, et les gains de chaque liste (notamment avec les sponsors, les soirées organisées, etc...). 
 
-\subsection{How to use}
+\subsection{Utilisation}
 
-To populate the database, the file \texttt{generate.php} allow to generate random data. The output of this script should be redirected in a file (in case you don't have php, a data.txt file is already provided):
+
+Pour remplir la base de donnée, le fichier \texttt{generate.php} nous permet de générer des données aléatoires. La sortie de ce script doit être redirigée directement dans un fichier (dans le cas où vous n'avez pas php, un fichier data.txt est fourni):
 
 \texttt{php generate.php > data.txt}
 
-The database can then be populated with this data: in the neo4j installation folder, execute the command
+La base de donnée peut être initialisée avec ces données: dans le dossier d'installation de neo4j, exécuter la commande:
 
 \texttt{./bin/neo4j-shell -file [path\_to\_data.txt] -path ./data/databases/graph.db}
 
-\section{Project}
+\section{Projet}
 
-\subsection{Database}
+\subsection{Base de donnée}
 
-% Diagramme
+\includegraphics[width=18cm,trim = 0cm 8cm 0cm 0cm, clip=true]{schema.pdf}
 
-Each \textit{Liste} can propose several \textit{SOS}. \textit{SOS} is linked to one \textit{Liste}. \\
-Each \textit{Liste} can propose several \textit{Event}. \textit{Event} is linked to one \textit{Liste} \\
-Each \textit{Personne} can be in love with one \textit{Personne}. \\
-Each \textit{Sponsor} can help one \textit{Liste}. \\
-A defined number of \textit{Personne} (e.g. 25) can be in a \textit{Liste}. \\
-Each \textit{Personne} can ask several \textit{SOS} from several \textit{Liste}. They can ask 0 or more times the same \textit{SOS}. \\
-Each \textit{Personne} can participate in an \textit{Event}. \\
-Each \textit{Personne} is in one \textit{Ecole}. \\
-Each \textit{Liste} is in one \textit{Ecole}. \\
+Chaque \textit{Liste} peut proposer différents \textit{SOS}.  \\
+Chaque \textit{Liste} peut proposer différents \textit{Evenement}.  \\
+Chaque \textit{Personne} peut être en couple avec une autre \textit{Personne}. \\
+Chaque \textit{Sponsor} peut aider une seule \textit{Liste}. \\
+Un nombre défini de \textit{Personne} (ex 25) peut être dans une \textit{Liste}. \\
+Chaque \textit{Personne} peut demander différents \textit{SOS} à différentes \textit{Liste}. Ils peuvent demander plusieurs fois le même \textit{SOS}. \\
+Chaque \textit{Personne} peut participer à plusieurs \textit{Evenement}. \\
+Chaque \textit{Personne} est dans une seule \textit{Ecole}. \\
+Chaque \textit{Liste} est dans une seule \textit{Ecole}. \\
 \subsection{Index}
-\subsection{Index sur les noms}
+\subsubsection{Index sur les noms}
 Afin de sélectionner une personne par son nom plus rapidement on crée l'index suivant.
 \\
 \begin{verbatim}
 CREATE INDEX ON :Personne(nom);
 \end{verbatim}
-\subsection{Index sur les rôles}
+\subsubsection{Index sur les rôles}
 Afin de sélectionner une personne listée par son rôle plus rapidement on crée l'index suivant.
 \\
 \begin{verbatim}
-CREATE INDEX ON :EST\_LISTE(role);
+CREATE INDEX ON :EST_LISTE(role);
 \end{verbatim}
-\subsection{Request}
+\subsection{Requêtes}
 
 % Liste des requetes
 % 1 file by query
@@ -91,7 +91,7 @@ CREATE INDEX ON :EST\_LISTE(role);
 %   If there are indexes involved, describe their impact. This text should not exceed 3linesby index
 %   Advantages and disadvantages of the query implementation proposed.
 
-\subsection{Requete 0}
+\subsubsection{Requête 0}
 Cette requête permet de tester l'efficacité de l'indexation. On a donc indexé les personnes par leur nom.
 \\
 On veut sélectionner toutes les participations de la personne qui a pour nom "Nom14". 
@@ -101,19 +101,19 @@ MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
 \end{verbatim}
 \\L'indexation permet de directement sélectionner le nœud de la personne sans parcourir tous les noeuds de type Personne.
 
-\subsection{Requete 1}
+\subsubsection{Requête 1}
 Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
 \\
 \begin{verbatim}
 MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
-MATCH (p:Personne)-[:EST\_LISTE {role:'president'}]->(l)
+MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
 RETURN l.nom,p.nom,e.nom
 \end{verbatim}
 
 Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les nœuds pour le trouver.
 
 
-\subsection{Requete 2}
+\subsubsection{Requête 2}
 Calculer pour chaque liste la somme totale obtenue par ses sponsors
 \\
 On selectionne chaque relation liste/sponsor. Puis pour chaque liste, on additionne les montants des aides.
@@ -125,24 +125,24 @@ RETURN l.nom, sum(a.montant) AS Subventions
 \\
 La requête est courte donc facilement lisible. Elle a en revanche le désavantage de ne pas avoir de clause GroupBy explicite comme en SQL.
 
-\subsection{Requete 3}
+\subsubsection{Requête 3}
 Retourner les couples dont un des membres est dans plus d'une liste.
 \\
 Ici on prend d'abord tous les couples. Ensuite on regarde leurs affiliations à des listes pour chacun des membres du couple. Enfin, on compte le nombre de liste dont est membre chaque personne du couple. On sélectionne finalement que les couples dont un des deux est listé à plus d'une liste.
 \\
 \begin{verbatim}
-MATCH (p1:Personne)-[:EN\_COUPLE]->(p2:Personne)
-MATCH (p1)-[:EST\_LISTE]->(l1:Liste)
-MATCH (p2)-[:EST\_LISTE]->(l2:Liste)
-WITH p1 as p1, p2 as p2, count(l2) as nombre\_listes2, count(l1) as nombre\_listes1
-WHERE nombre\_listes1 > 1 OR nombre\_listes2 > 1 
+MATCH (p1:Personne)-[:EN_COUPLE]->(p2:Personne)
+MATCH (p1)-[:EST_LISTE]->(l1:Liste)
+MATCH (p2)-[:EST_LISTE]->(l2:Liste)
+WITH p1 as p1, p2 as p2, count(l2) as nombre_listes2, count(l1) as nombre_listes1
+WHERE nombre_listes1 > 1 OR nombre_listes2 > 1 
 RETURN p1.nom , p2.nom
 ORDER BY p1.nom
 \end{verbatim}
 \\
 La requête a pour désavantage d'afficher deux fois le couple car la relation de couple apparait deux fois pour les deux personnes.
 
-\subsection{Requete 4}
+\subsubsection{Requête 4}
 Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants.
 
 On va récupérer l'appréciation associée à chaque participation a un évènement, sommer ces appréciations par évènement et diviser pas le nombre de participation à cet évènement.
@@ -152,16 +152,16 @@ RETURN e.nom, sum(p.appreciation)/count(p) AS score
 ORDER BY score DESC
 \end{verbatim}
 
-\subsection{Requete 5}
+\subsubsection{Requête 5}
 Retourner la liste ayant effectué le plus de SOS
 \\
 On sélectionne d'abord tous les sos en gardant la relation avec la liste (qui servira pour trier par liste). Puis pour chaque sos, on sélectionne toutes les demandes de sos qu'il y a eu. On somme ensuite pour chaque liste, la somme des demandes de leur sos.
 \\
 \begin{verbatim}
 MATCH (l:Liste)-[]->(s:SOS)
-MATCH (s)-[demande:A\_DEMANDE]-()
-RETURN l.nom, sum(demande.nombre) as nombre\_sos
-ORDER BY nombre\_sos desc LIMIT 1
+MATCH (s)-[demande:A_DEMANDE]-()
+RETURN l.nom, sum(demande.nombre) as nombre_sos
+ORDER BY nombre_sos desc LIMIT 1
 \end{verbatim}
 \\ 
 Le GroupBy n'est pas très explicite ici.

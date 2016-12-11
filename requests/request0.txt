@@ -1,0 +1,2 @@
+1 - Retourner pour la personne "Nom14" l'ensemble des events auxquels il a participé
+MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
