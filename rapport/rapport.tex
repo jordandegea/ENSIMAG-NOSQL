@@ -71,11 +71,15 @@ Each \textit{Liste} is in one \textit{Ecole}. \\
 \subsection{Index sur les noms}
 Afin de sélectionner une personne par son nom plus rapidement on crée l'index suivant.
 \\
+\begin{verbatim}
 CREATE INDEX ON :Personne(nom);
+\end{verbatim}
 \subsection{Index sur les rôles}
 Afin de sélectionner une personne listée par son rôle plus rapidement on crée l'index suivant.
 \\
+\begin{verbatim}
 CREATE INDEX ON :EST\_LISTE(role);
+\end{verbatim}
 \subsection{Request}
 
 % Liste des requetes
@@ -90,17 +94,21 @@ CREATE INDEX ON :EST\_LISTE(role);
 \subsection{Requete 0}
 Cette requête permet de tester l'efficacité de l'indexation. On a donc indexé les personnes par leur nom.
 \\
-On veut sélectionner toutes les participation de la personne qui a pour nom "Nom14". 
+On veut sélectionner toutes les participations de la personne qui a pour nom "Nom14". 
 \\
+\begin{verbatim}
 MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
-\\L'indexation permet de directement sélectionner le noeud de la personne sans parcourir tous les noeuds de type Personne.
+\end{verbatim}
+\\L'indexation permet de directement sélectionner le nœud de la personne sans parcourir tous les noeuds de type Personne.
 
 \subsection{Requete 1}
 Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
 \\
+\begin{verbatim}
 MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
 MATCH (p:Personne)-[:EST\_LISTE {role:'president'}]->(l)
 RETURN l.nom,p.nom,e.nom
+\end{verbatim}
 
 Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les nœuds pour le trouver.
 
@@ -110,16 +118,19 @@ Calculer pour chaque liste la somme totale obtenue par ses sponsors
 \\
 On selectionne chaque relation liste/sponsor. Puis pour chaque liste, on additionne les montants des aides.
 \\
+\begin{verbatim}
 MATCH (l:Liste)-[a:AIDE]-() 
 RETURN l.nom, sum(a.montant) AS Subventions
+\end{verbatim}
 \\
 La requête est courte donc facilement lisible. Elle a en revanche le désavantage de ne pas avoir de clause GroupBy explicite comme en SQL.
 
 \subsection{Requete 3}
 Retourner les couples dont un des membres est dans plus d'une liste.
 \\
-Ici on prend d'abord tous les couples. Ensuite on regarde leur affiliation à des listes pour chacun des membres du couple. Enfin, on compte le nombre de liste dont est membre chaque personne du couple. On sélectionne finalement que les couples dont un des deux est listé à plus d'une liste.
+Ici on prend d'abord tous les couples. Ensuite on regarde leurs affiliations à des listes pour chacun des membres du couple. Enfin, on compte le nombre de liste dont est membre chaque personne du couple. On sélectionne finalement que les couples dont un des deux est listé à plus d'une liste.
 \\
+\begin{verbatim}
 MATCH (p1:Personne)-[:EN\_COUPLE]->(p2:Personne)
 MATCH (p1)-[:EST\_LISTE]->(l1:Liste)
 MATCH (p2)-[:EST\_LISTE]->(l2:Liste)
@@ -127,8 +138,9 @@ WITH p1 as p1, p2 as p2, count(l2) as nombre\_listes2, count(l1) as nombre\_list
 WHERE nombre\_listes1 > 1 OR nombre\_listes2 > 1 
 RETURN p1.nom , p2.nom
 ORDER BY p1.nom
+\end{verbatim}
 \\
-La requête à l'avantage d'être facilement compréhensible. Elle a pour désavantage d'afficher deux fois le couple car la relation de couple apparait deux fois pour les deux personnes.
+La requête a pour désavantage d'afficher deux fois le couple car la relation de couple apparait deux fois pour les deux personnes.
 
 \subsection{Requete 4}
 Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants.
@@ -145,12 +157,14 @@ Retourner la liste ayant effectué le plus de SOS
 \\
 On sélectionne d'abord tous les sos en gardant la relation avec la liste (qui servira pour trier par liste). Puis pour chaque sos, on sélectionne toutes les demandes de sos qu'il y a eu. On somme ensuite pour chaque liste, la somme des demandes de leur sos.
 \\
+\begin{verbatim}
 MATCH (l:Liste)-[]->(s:SOS)
 MATCH (s)-[demande:A\_DEMANDE]-()
 RETURN l.nom, sum(demande.nombre) as nombre\_sos
 ORDER BY nombre\_sos desc LIMIT 1
+\end{verbatim}
 \\ 
-Le GroupBy n'est toujours pas très explicite ici.
+Le GroupBy n'est pas très explicite ici.
 
 \subsubsection{Average opinion for each Event and each Liste} 
 
