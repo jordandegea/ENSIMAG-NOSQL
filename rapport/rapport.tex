@@ -57,7 +57,15 @@ Each \textit{Personne} can ask several \textit{SOS} from several \textit{Liste}.
 Each \textit{Personne} can participate in an \textit{Event}. \\
 Each \textit{Personne} is in one \textit{Ecole}. \\
 Each \textit{Liste} is in one \textit{Ecole}. \\
-
+\subsection{Indexs}
+\subsection{Index sur les noms}
+Afin de sélectionner une personne par son nom plus rapidement on crée l'index suivant.
+\\
+CREATE INDEX ON :Personne(nom);
+\subsection{Index sur les rôles}
+Afin de sélectionner une personne listée par son rôle plus rapidement on crée l'index suivant.
+\\
+CREATE INDEX ON :EST_LISTE(role);
 \subsection{Request}
 
 % Liste des requetes
@@ -72,7 +80,10 @@ Each \textit{Liste} is in one \textit{Ecole}. \\
 \subsection{Requete 0}
 Cette requête permet de tester l'efficacité de l'indexation. On a donc indéxé les personnes par leur nom.
 \\
+On veut sélectionner toutes les participation de la personne qui a pour nom "Nom14". 
+\\
 MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
+\\L'indexation permet de directement sélectionner le noeud de la personne sans parcourir tous les noeuds de type Personne.
 
 \subsection{Requete 1}
 Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
