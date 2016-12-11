@@ -239,6 +239,7 @@ foreach ($listes as $liste) {
 	print($liste->exportRelations());
 }
 
-print("CREATE CONSTRAINT ON (a:Liste) ASSERT a.nom IS UNIQUE\n")
-print("CREATE CONSTRAINT ON (a:Ecole) ASSERT a.nom IS UNIQUE\n")
-print("CREATE CONSTRAINT ON (a:Evenement) ASSERT a.nom IS UNIQUE\n")
+print(";\n");
+print("CREATE CONSTRAINT ON (a:Liste) ASSERT a.nom IS UNIQUE;\n");
+print("CREATE CONSTRAINT ON (a:Ecole) ASSERT a.nom IS UNIQUE;\n");
+print("CREATE CONSTRAINT ON (a:Evenement) ASSERT a.nom IS UNIQUE;\n");
