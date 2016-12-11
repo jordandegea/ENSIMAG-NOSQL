@@ -243,3 +243,5 @@ print(";\n");
 print("CREATE CONSTRAINT ON (a:Liste) ASSERT a.nom IS UNIQUE;\n");
 print("CREATE CONSTRAINT ON (a:Ecole) ASSERT a.nom IS UNIQUE;\n");
 print("CREATE CONSTRAINT ON (a:Evenement) ASSERT a.nom IS UNIQUE;\n");
+print("CREATE INDEX ON :Personne(nom);\n");
+print("CREATE INDEX ON :EST_LISTE(role);\n");
