@@ -65,7 +65,7 @@ CREATE INDEX ON :Personne(nom);
 \subsection{Index sur les rôles}
 Afin de sélectionner une personne listée par son rôle plus rapidement on crée l'index suivant.
 \\
-CREATE INDEX ON :EST_LISTE(role);
+CREATE INDEX ON :EST\_LISTE(role);
 \subsection{Request}
 
 % Liste des requetes
@@ -89,11 +89,11 @@ MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
 Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
 \\
 MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
-MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
+MATCH (p:Personne)-[:EST\_LISTE {role:'president'}]->(l)
 RETURN l.nom,p.nom,e.nom
 \\WILLIAM EXPLIQUE STP ICI
 
-\\Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les noeuds pour le trouver.
+Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les noeuds pour le trouver.
 
 
 \subsection{Requete 2}
@@ -111,11 +111,11 @@ Retourner les couples dont un des membres est dans plus d'une liste.
 \\
 Ici on prend d'abord tous les couples. Ensuite on regarde leur affiliation à des listes pour chacun des membres du couple. Enfin, on compte le nombre de liste dont est membre chaque personne du couple. On sélectionne finalement que les couples dont un des deux est listé à plus d'une liste.
 \\
-MATCH (p1:Personne)-[:EN_COUPLE]->(p2:Personne)
-MATCH (p1)-[:EST_LISTE]->(l1:Liste)
-MATCH (p2)-[:EST_LISTE]->(l2:Liste)
-WITH p1 as p1, p2 as p2, count(l2) as nombre_listes2, count(l1) as nombre_listes1
-WHERE nombre_listes1 > 1 OR nombre_listes2 > 1 
+MATCH (p1:Personne)-[:EN\_COUPLE]->(p2:Personne)
+MATCH (p1)-[:EST\_LISTE]->(l1:Liste)
+MATCH (p2)-[:EST\_LISTE]->(l2:Liste)
+WITH p1 as p1, p2 as p2, count(l2) as nombre\_listes2, count(l1) as nombre\_listes1
+WHERE nombre\_listes1 > 1 OR nombre\_listes2 > 1 
 RETURN p1.nom , p2.nom
 ORDER BY p1.nom
 \\
@@ -127,9 +127,9 @@ Retourner la liste ayant effectué le plus de SOS
 On sélectionne d'abord tous les sos en gardant la relation avec la liste (qui servira pour trier par liste). Puis pour chaque sos, on sélectionne toutes les demandes de sos qu'il y a eu. On somme ensuite pour chaque liste, la somme des demandes de leur sos.
 \\
 MATCH (l:Liste)-[]->(s:SOS)
-MATCH (s)-[demande:A_DEMANDE]-()
-RETURN l.nom, sum(demande.nombre) as nombre_sos
-ORDER BY nombre_sos desc LIMIT 1
+MATCH (s)-[demande:A\_DEMANDE]-()
+RETURN l.nom, sum(demande.nombre) as nombre\_sos
+ORDER BY nombre\_sos desc LIMIT 1
 \\ 
 Le GroupBy n'est toujours pas très explicite ici.
 
