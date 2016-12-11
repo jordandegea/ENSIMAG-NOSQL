@@ -69,6 +69,22 @@ Each \textit{Liste} is in one \textit{Ecole}. \\
 %   If there are indexes involved, describe their impact. This text should not exceed 3linesby index
 %   Advantages and disadvantages of the query implementation proposed.
 
+\subsection{Requete 0}
+Cette requête permet de tester l'efficacité de l'indexation. On a donc indéxé les personnes par leur nom.
+\\
+MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
+
+\subsection{Requete 1}
+Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
+\\
+MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
+MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
+RETURN l.nom,p.nom,e.nom
+\\WILLIAM EXPLIQUE STP ICI
+
+\\Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les noeuds pour le trouver.
+
+
 \subsection{Requete 2}
 Calculer pour chaque liste la somme totale obtenue par ses sponsors
 \\
