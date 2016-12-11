@@ -18,6 +18,6 @@ class Aide{
      *
      */
     public function export($sponsor){
-        return "CREATE ($sponsor->name)-[:AIDE {montant:$this->montant}]->({$this->liste->name})";
+        return "CREATE ($sponsor->name)-[:AIDE {montant:$this->montant}]->({$this->liste->name})\n";
     }
 }

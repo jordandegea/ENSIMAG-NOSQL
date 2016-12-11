@@ -1,0 +1,8 @@
+3 - Retourner les couples dont un des membres est dans plus d'une liste
+MATCH (p1:Personne)-[:EN_COUPLE]->(p2:Personne)
+MATCH (p1)-[:EST_LISTE]->(l1:Liste)
+MATCH (p2)-[:EST_LISTE]->(l2:Liste)
+WITH p1 as p1, p2 as p2, count(l2) as nombre_listes2, count(l1) as nombre_listes1
+WHERE nombre_listes1 > 1 OR nombre_listes2 > 1 
+RETURN p1.nom , p2.nom
+ORDER BY p1.nom

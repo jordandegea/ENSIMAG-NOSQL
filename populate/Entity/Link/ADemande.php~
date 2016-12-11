@@ -18,6 +18,6 @@ class ADemande{
      */
     public function export($person){
 	$name = $person->fullName();
-        return "CREATE ($name)-[:A_DEMANDE {nombre: $this->nombre}]->{$this->SOS->nom}";
+        return "CREATE ($name)-[:A_DEMANDE {nombre: $this->nombre}]->{$this->SOS->nom}\n";
     }
 }

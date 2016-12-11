@@ -1,0 +1,4 @@
+4 - Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants
+MATCH (e:Evenement)<-[p:PARTICIPE]-(r:Personne)
+RETURN e.nom, sum(p.appreciation)/count(p) AS score
+ORDER BY score DESC

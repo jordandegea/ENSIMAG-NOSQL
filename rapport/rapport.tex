@@ -42,6 +42,16 @@ We knew that MongoDB was more used than Neo4j, e.g. for mobile backends. So we p
 
 Our subject is named "Prognosis of a school's winning lists". We wanted to apply this TP to a concrete application. The objective is to predict the results of lists after the campaign. In Bonus, we calculate costs and earnings for each lists. 
 
+\subsection{How to use}
+
+To populate the database, the file \texttt{generate.php} allow to generate random data. The output of this script should be redirected in a file (in case you don't have php, a data.txt file is already provided):
+
+\texttt{php generate.php > data.txt}
+
+The database can then be populated with this data: in the neo4j installation folder, execute the command
+
+\texttt{./bin/neo4j-shell -file [path\_to\_data.txt] -path ./data/databases/graph.db}
+
 \section{Project}
 
 \subsection{Database}
@@ -57,7 +67,7 @@ Each \textit{Personne} can ask several \textit{SOS} from several \textit{Liste}.
 Each \textit{Personne} can participate in an \textit{Event}. \\
 Each \textit{Personne} is in one \textit{Ecole}. \\
 Each \textit{Liste} is in one \textit{Ecole}. \\
-\subsection{Indexs}
+\subsection{Index}
 \subsection{Index sur les noms}
 Afin de sélectionner une personne par son nom plus rapidement on crée l'index suivant.
 \\
@@ -78,7 +88,7 @@ CREATE INDEX ON :EST\_LISTE(role);
 %   Advantages and disadvantages of the query implementation proposed.
 
 \subsection{Requete 0}
-Cette requête permet de tester l'efficacité de l'indexation. On a donc indéxé les personnes par leur nom.
+Cette requête permet de tester l'efficacité de l'indexation. On a donc indexé les personnes par leur nom.
 \\
 On veut sélectionner toutes les participation de la personne qui a pour nom "Nom14". 
 \\
@@ -91,9 +101,8 @@ Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son éco
 MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
 MATCH (p:Personne)-[:EST\_LISTE {role:'president'}]->(l)
 RETURN l.nom,p.nom,e.nom
-\\WILLIAM EXPLIQUE STP ICI
 
-Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les noeuds pour le trouver.
+Pour accélérer la requête, on a créé un index sur le rôle de chaque listé, ainsi c'est plus rapide de trouver le président car il y en a qu'un seul et on a donc pas à parcourir tous les nœuds pour le trouver.
 
 
 \subsection{Requete 2}
@@ -120,6 +129,16 @@ RETURN p1.nom , p2.nom
 ORDER BY p1.nom
 \\
 La requête à l'avantage d'être facilement compréhensible. Elle a pour désavantage d'afficher deux fois le couple car la relation de couple apparait deux fois pour les deux personnes.
+
+\subsection{Requete 4}
+Retourner les évènements par ordre d'appréciation proportionellement au nombre de participants.
+
+On va récupérer l'appréciation associée à chaque participation a un évènement, sommer ces appréciations par évènement et diviser pas le nombre de participation à cet évènement.
+\begin{verbatim}
+MATCH (e:Evenement)<-[p:PARTICIPE]-(r:Personne)
+RETURN e.nom, sum(p.appreciation)/count(p) AS score
+ORDER BY score DESC
+\end{verbatim}
 
 \subsection{Requete 5}
 Retourner la liste ayant effectué le plus de SOS

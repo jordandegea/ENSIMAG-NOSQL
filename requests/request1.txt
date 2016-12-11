@@ -1,0 +1,4 @@
+1 - Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
+MATCH (l:Liste)-[:APPARTIENT]->(e:Ecole)
+MATCH (p:Personne)-[:EST_LISTE {role:'president'}]->(l)
+RETURN l.nom,p.nom,e.nom

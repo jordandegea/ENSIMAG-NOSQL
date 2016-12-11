@@ -1,0 +1,6 @@
+5 - Retourner la liste ayant effectué le plus de SOS
+MATCH (l:Liste)-[]->(s:SOS)
+MATCH (s)-[demande:A_DEMANDE]-()
+RETURN l.nom, sum(demande.nombre) as nombre_sos
+ORDER BY nombre_sos desc LIMIT 1
+

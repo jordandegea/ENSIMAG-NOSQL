@@ -1,0 +1,3 @@
+2 - Calculer pour chaque liste la somme totale obtenue par ses sponsors
+MATCH (l:Liste)-[a:AIDE]-() 
+RETURN l.nom, sum(a.montant) AS Subventions
