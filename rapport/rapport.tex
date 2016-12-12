@@ -99,7 +99,7 @@ On veut sélectionner toutes les participations de la personne qui a pour nom "N
 \begin{verbatim}
 MATCH p = (:Personne{nom:"Nom14"})-[:PARTICIPE]-() RETURN p
 \end{verbatim}
-\\L'indexation permet de directement sélectionner le nœud de la personne sans parcourir tous les nœuds de type Personne.
+L'indexation permet de directement sélectionner le nœud de la personne sans parcourir tous les nœuds de type Personne.
 
 \subsubsection{Requête 1}
 Retourner pour chaque liste son type (BDA, BDS, BDE), son président et son école.
@@ -122,7 +122,7 @@ On selectionne chaque relation liste/sponsor. Puis pour chaque liste, on additio
 MATCH (l:Liste)-[a:AIDE]-() 
 RETURN l.nom, sum(a.montant) AS Subventions
 \end{verbatim}
-\\
+
 La requête est courte donc facilement lisible. Elle a en revanche le désavantage de ne pas avoir de clause GroupBy explicite comme en SQL.
 
 \subsubsection{Requête 3}
@@ -138,8 +138,8 @@ WITH p1 as p1, p2 as p2, count(l2) as nombre_listes2, count(l1) as nombre_listes
 WHERE nombre_listes1 > 1 OR nombre_listes2 > 1 
 RETURN p1.nom , p2.nom
 ORDER BY p1.nom
-\end{verbatim}
-\\
+\end{verbatim} 
+
 La requête a pour désavantage d'afficher deux fois le couple car la relation de couple apparait deux fois pour les deux personnes.
 
 \subsubsection{Requête 4}
@@ -163,7 +163,7 @@ MATCH (s)-[demande:A_DEMANDE]-()
 RETURN l.nom, sum(demande.nombre) as nombre_sos
 ORDER BY nombre_sos desc LIMIT 1
 \end{verbatim}
-\\ 
+
 Le GroupBy n'est pas très explicite ici.
 
 
