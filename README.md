@@ -1,5 +1,5 @@
-# ENSIMAG-NOSQL
-
+# Practice Neo4J
+School Project
 
 # Generation de données aléatoire
 
